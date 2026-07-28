@@ -1,0 +1,34 @@
+# Demo-generated git sandboxes (recreated by scripts)
+workspaces/
+workspaces-lost/
+workspaces-old-*/
+workspaces-lost-old-*/
+
+# Optional local snapshots
+snapshots/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+.env
+.env.*
+
+# Tooling / IDE (keep .vscode launch/settings tracked)
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Pytest / coverage (if added later)
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/

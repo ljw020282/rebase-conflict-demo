@@ -1,0 +1,9 @@
+# Demo scripts use the Python standard library + system Git only.
+# No pip packages required.
+#
+# Runtime:
+#   Python >= 3.10
+#   Git >= 2.23 (needs `git switch`)
+#
+# Install (optional, no-op for deps):
+#   python -m pip install -r requirements.txt

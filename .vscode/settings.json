@@ -1,0 +1,25 @@
+{
+  "python.languageServer": "None",
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/scripts"
+  ],
+  "python.analysis.typeCheckingMode": "basic",
+  "python.terminal.activateEnvironment": true,
+  "terminal.integrated.cwd": "${workspaceFolder}",
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true
+  },
+  "files.watcherExclude": {
+    "**/workspaces/**": true,
+    "**/workspaces-lost/**": true,
+    "**/workspaces-old-*/**": true,
+    "**/workspaces-lost-old-*/**": true
+  },
+  "search.exclude": {
+    "**/workspaces/**": true,
+    "**/workspaces-lost/**": true,
+    "**/workspaces-old-*/**": true,
+    "**/workspaces-lost-old-*/**": true
+  }
+}
