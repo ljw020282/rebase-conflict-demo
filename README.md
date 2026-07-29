@@ -40,9 +40,9 @@ git config --global alias.lg "log --oneline --graph --all --decorate"
 
 建议顺序：
 
-1. **01 → 02**：在 `workspaces/bob` 看冲突与分叉  
-2. **03**：体会「代码对了、历史废了」  
-3. **04**：撤掉 WRONG merge，自己找截取点，`--onto`  
+1. **01 → 02**：在 `workspaces/bob` 查看orgin/feature 和 本地feature的双胞胎提交（两个login，两个send msg）
+2. **03**：查看错误解决后的3-way-mege 以及双胞胎提交  
+3. **04**：理解rebase --onto的关心内容，不关心哈希；对比3-way merge，关心内容，也关心哈希  
 4. **05**（独立目录 `workspaces-lost/`）：对比 lease 与裸 force  
 
 ```bash
@@ -56,19 +56,12 @@ python scripts/01-scenario-A-duplicate-history.py
 
 ### 情况说明（提交链）
 
-记两条链：
-
-| 缩写 | 含义 |
-| --- | --- |
-| `ilse` | Bob 本地：`init → login → send → emoji`（emoji 可尚未推送） |
-| `imls` | Alice 强推后远程：`init → mix → login' → send'` |
-
 发生过程：
 
 1. 一开始公共 `feature` 是 `init → login → send`（Alice / Bob 都基于它）。
-2. Alice 在 `main` 上做了 `mix`（security patch），为了本地历史干净，把 `login` / `send` **rebase** 到新 `main` 上 → 变成 `init → mix → login' → send'`。
+2. Alice 在 `main` 上做了 `mix`（security patch），为了本地历史干净，把 `login` / `send` **rebase** 到新 `main` 上 → 变成 `init → mix → login' → send'`。伪代码`git rabase --onto main login父节点到 send-msg`
 3. **关键错误**：Alice 把 rebase 后的提交**强推**到公共 `feature`。  
-   Bob 这边同名的 `login` / `send` **代码几乎一样，但父节点变了 → SHA 全变**（双胞胎提交）。
+   Bob 这边同名的 `login` / `send` **代码几乎一样，但父节点变了 → SHA 全变**（双胞胎提交）。一边是ilsp链，一边origin是imls链
 4. Bob 本地还有自己的 `emoji`，再 `pull`：msg 不清、内容没细看，Git 只能当两段历史做 **3-way merge**。
 
 一键到冲突态：
@@ -166,7 +159,8 @@ python scripts/04-scenario-B-lost-commits.py
 ```
 rebase-conflict-demo/
 ├── README.md
-├── docs/                 ← 手搓步骤 + 图
+├── docs/                 ← 手搓步骤
+├── images/               ← 场景示意图
 ├── scripts/              ← 00～04 一键脚本 + common.py
 ├── workspaces/           ← 场景 A 生成（gitignore）
 └── workspaces-lost/      ← 场景 B 生成（gitignore）
